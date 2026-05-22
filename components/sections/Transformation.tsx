@@ -1,39 +1,18 @@
 import { SmartImage } from '@/components/ui/SmartImage'
 import { Reveal } from '@/components/ui/Reveal'
 
-const pairs = [
-  { n: 1, caption: 'Lissage longue durée · Cheveux bouclés épais' },
-  { n: 2, caption: 'Lissage & soin kératine · Cheveux méditerranéens' },
-  { n: 3, caption: 'Lissage douceur · Cheveux fins colorés' },
+const resultats = [
+  { img: 'resultat-01', caption: 'Lissage brésilien · Cheveux épais' },
+  { img: 'resultat-02', caption: 'Coloration & soin · Cheveux longs' },
+  { img: 'resultat-03', caption: 'Lissage lumière · Cheveux fins' },
 ]
-
-function Tile({ src, alt, label, tint }: { src: string; alt: string; label: string; tint: 'terra' | 'jade' }) {
-  return (
-    <div className="relative aspect-[3/4] flex-1 overflow-hidden bg-charbon">
-      <SmartImage src={src} alt={alt} fill sizes="320px" className="object-cover" />
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          background:
-            tint === 'terra'
-              ? 'linear-gradient(to top, rgba(212,133,107,0.35), transparent 55%)'
-              : 'linear-gradient(to top, rgba(45,106,94,0.35), transparent 55%)',
-        }}
-      />
-      <span className="absolute left-3 top-3 font-sans text-[10px] uppercase tracking-[0.3em] text-lait/80">
-        {label}
-      </span>
-    </div>
-  )
-}
 
 export function Transformation() {
   return (
     <section className="overflow-hidden bg-charbon py-24 text-lait md:py-32">
       <div className="wrap">
         <Reveal>
-          <p className="eyebrow text-jade">— Transformations</p>
+          <p className="eyebrow text-jade">— Résultats</p>
         </Reveal>
         <Reveal delay={80}>
           <h2 className="mt-6 font-display" style={{ fontSize: 'clamp(2.4rem,4.5vw,4rem)', lineHeight: 1.05 }}>
@@ -46,24 +25,24 @@ export function Transformation() {
 
       <Reveal delay={120}>
         <div className="hscroll mt-14 gap-6 px-6 md:px-[max(24px,calc((100vw-1240px)/2+24px))]">
-          {pairs.map((p) => (
-            <figure key={p.n} className="w-[86vw] max-w-[600px] sm:w-[560px]">
-              <div className="flex gap-[2px] bg-jade">
-                <Tile
-                  src={`/images/avant-apres/avant-0${p.n}.jpg`}
-                  alt={`Avant — ${p.caption}`}
-                  label="Avant"
-                  tint="terra"
+          {resultats.map((r) => (
+            <figure key={r.img} className="w-[78vw] max-w-[420px] sm:w-[380px]">
+              <div className="relative aspect-[3/4] overflow-hidden bg-charbon">
+                <SmartImage
+                  src={`/images/avant-apres/${r.img}.jpg`}
+                  alt={r.caption}
+                  fill
+                  sizes="420px"
+                  className="object-cover"
                 />
-                <Tile
-                  src={`/images/avant-apres/apres-0${p.n}.jpg`}
-                  alt={`Après — ${p.caption}`}
-                  label="Après"
-                  tint="jade"
+                <div
+                  aria-hidden
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(to top, rgba(45,106,94,0.32), transparent 55%)' }}
                 />
               </div>
               <figcaption className="mt-4 font-sans text-[13px] font-light tracking-wide text-sable/80">
-                {p.caption}
+                {r.caption}
               </figcaption>
             </figure>
           ))}
